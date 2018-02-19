@@ -43,16 +43,18 @@ autocmd BufEnter * execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('
 
 "define plugins with options
 call plug#begin('~/.vim/plugged')
-Plug 'parsonsmatt/intero-neovim'
-Plug 'haskell-vim'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " {{{
-    let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
-    let g:haskell_enable_recursivedo = 1      " to enable highlighting of `mdo` and `rec`
-    let g:haskell_enable_arrowsyntax = 1      " to enable highlighting of `proc`
-    let g:haskell_enable_pattern_synonyms = 1 " to enable highlighting of `pattern`
-    let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
-    let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
-    let g:haskell_backpack = 1                " to enable highlighting of backpack keywords
+    let g:deoplete#enable_at_startup = 1
+" }}}
+Plug 'zchee/deoplete-jedi'
+" {{{
+" }}}
+Plug 'https://github.com/Shougo/echodoc.vim.git'
+" {{{
+    set cmdheight=2    " DOES NOT WORK
+    set noshowmode    " DOES WORK
+    let g:echodoc_enable_at_startup = 1
 " }}}
 Plug 'neomake/neomake'
 " {{{
@@ -60,8 +62,8 @@ Plug 'neomake/neomake'
 
     hi NeomakeError cterm=underline
     hi NeomakeWarning cterm=underline
-    hi NeomakeErrorSign ctermfg=Black
-    hi NeomakeWarningSign ctermfg=Black
+    hi NeomakeErrorSign ctermfg=Red
+    hi NeomakeWarningSign ctermfg=Red
     autocmd! BufWritePost * Neomake
 " }}}
 Plug 'tpope/vim-fugitive'
