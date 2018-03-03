@@ -6,6 +6,7 @@ set shiftwidth=4
 set expandtab
 set nowrap
 set colorcolumn=80
+set fo=aw2tq
 
 "let &colorcolumn=join(range(80, 999), ",")
 
@@ -43,6 +44,20 @@ autocmd BufEnter * execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('
 
 "define plugins with options
 call plug#begin('~/.vim/plugged')
+Plug 'majutsushi/tagbar'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-scripts/indentpython'
+Plug 'tmhedberg/SimpylFold'
+"{{{
+"}}}
+Plug 'janko-m/vim-test'
+"{{{
+"}}}
+Plug 'sbdchd/neoformat'
+" {{{
+    let g:neoformat_enabled_python = ['yapf']
+" }}}
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " {{{
     let g:deoplete#enable_at_startup = 1
