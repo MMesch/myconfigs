@@ -8,6 +8,8 @@ set fo=aw2tq
 
 "let &colorcolumn=join(range(80, 999), ",")
 
+" enable mouse in all modes:
+set mouse=a 
 
 "fold options:
 set foldmethod=indent
@@ -23,10 +25,14 @@ au FileType python setlocal fo=jctroql
 au FileType python setlocal expandtab shiftwidth=4 tabstop=4 smartindent
 au FileType python setlocal cinwords=if,elif,else,for,while,try,except,finally,def,class,with
 
-"enable mouse in all modes:
-set mouse=a 
+" ================== VARIABLE REPLACE MAPPINGS ======================
+" local replace
+nmap gr yaw[mV]M:s/<C-R>///gc<left><left><left>
 
-"enable x window clipboard
+" global replace
+nnoremap gR *:%s/<C-R>///gc<left><left><left>
+
+"======================= X WINDOW CLIPBOARD ========================
 set clipboard=unnamedplus
 
 function! ClipboardYank()
@@ -69,6 +75,7 @@ Plug 'sbdchd/neoformat'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " {{{
     let g:deoplete#enable_at_startup = 1
+    let g:deoplete#sources#jedi#show_docstring = 1
 " }}}
 Plug 'zchee/deoplete-jedi'
 " {{{
