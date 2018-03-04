@@ -2,16 +2,12 @@
 set guicursor=
 
 "some basic options
-set shiftwidth=4
-set expandtab
 set nowrap
 set colorcolumn=80
 set fo=aw2tq
 
 "let &colorcolumn=join(range(80, 999), ",")
 
-" autopep 8 when hitting gq
-au FileType python setlocal formatprg=autopep8\ --aggressive\ -
 
 "fold options:
 set foldmethod=indent
@@ -20,6 +16,12 @@ nnoremap <space> za
 
 syntax on
 filetype plugin indent on
+
+" autopep 8 when hitting gq
+" au FileType python setlocal formatprg=autopep8\ --aggressive\ -
+au FileType python setlocal fo=jctroql
+au FileType python setlocal expandtab shiftwidth=4 tabstop=4 smartindent
+au FileType python setlocal cinwords=if,elif,else,for,while,try,except,finally,def,class,with
 
 "enable mouse in all modes:
 set mouse=a 
@@ -44,7 +46,13 @@ autocmd BufEnter * execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('
 
 "define plugins with options
 call plug#begin('~/.vim/plugged')
+Plug 'tell-k/vim-autopep8'
+Plug 'godlygeek/tabular'
+Plug 'tpope/vim-markdown'
 Plug 'majutsushi/tagbar'
+"{{{
+    let g:tagbar_width = 30
+"}}}
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/indentpython'
@@ -89,8 +97,6 @@ Plug 'terryma/vim-smooth-scroll'
   noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
   noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
 "}}}
-Plug 'godlygeek/tabular'
-Plug 'plasticboy/vim-markdown'
 call plug#end()
 
 """"" COLORSCHEME
