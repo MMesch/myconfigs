@@ -4,7 +4,7 @@ set guicursor=
 "some basic options
 set nowrap
 set colorcolumn=80
-set fo=aw2tq
+set fo=w2q
 
 "let &colorcolumn=join(range(80, 999), ",")
 
@@ -24,10 +24,13 @@ filetype plugin indent on
 au FileType python setlocal fo=jctroql
 au FileType python setlocal expandtab shiftwidth=4 tabstop=4 smartindent
 au FileType python setlocal cinwords=if,elif,else,for,while,try,except,finally,def,class,with
+" au FileType python nnoremap ipdb "import ipdb; ipdb.set_trace()"
+au FileType python let @d = "oimport ipdb; ipdb.set_trace()"
+au FileType dockerfile setlocal fo=aw2qc
 
 " ================== VARIABLE REPLACE MAPPINGS ======================
 " local replace
-nmap gr yaw[mV]M:s/<C-R>///gc<left><left><left>
+nmap gr *[mV]M:s/<C-R>///gc<left><left><left>
 
 " global replace
 nnoremap gR *:%s/<C-R>///gc<left><left><left>
@@ -52,6 +55,17 @@ autocmd BufEnter * execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('
 
 "define plugins with options
 call plug#begin('~/.vim/plugged')
+Plug 'junegunn/goyo.vim'
+Plug 'scrooloose/nerdtree.git'
+Plug 'mileszs/ack.vim'
+"{{{
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+"}}}
+Plug '~/.fzf'
+Plug 'junegunn/fzf.vim'
+Plug 'scrooloose/nerdtree'
 Plug 'tell-k/vim-autopep8'
 Plug 'godlygeek/tabular'
 Plug 'tpope/vim-markdown'
