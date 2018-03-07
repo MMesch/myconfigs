@@ -5,7 +5,6 @@ set guicursor=
 set nowrap
 set colorcolumn=80
 set fo=w2q
-
 "let &colorcolumn=join(range(80, 999), ",")
 
 " enable mouse in all modes:
@@ -24,8 +23,10 @@ filetype plugin indent on
 au FileType python setlocal fo=jctroql
 au FileType python setlocal expandtab shiftwidth=4 tabstop=4 smartindent
 au FileType python setlocal cinwords=if,elif,else,for,while,try,except,finally,def,class,with
-" au FileType python nnoremap ipdb "import ipdb; ipdb.set_trace()"
-au FileType python let @d = "oimport ipdb; ipdb.set_trace()"
+au FileType python setlocal define=^\s*\\(def\\\\|class\\)
+" au FileType python nnoremap ipdb "import pdb; pdb.set_trace()"
+au FileType python let @d = "oimport pdb; pdb.set_trace()"
+
 au FileType dockerfile setlocal fo=aw2qc
 
 " ================== VARIABLE REPLACE MAPPINGS ======================
@@ -55,6 +56,7 @@ autocmd BufEnter * execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('
 
 "define plugins with options
 call plug#begin('~/.vim/plugged')
+Plug 'icymind/NeoSolarized'
 Plug 'junegunn/goyo.vim'
 Plug 'scrooloose/nerdtree.git'
 Plug 'mileszs/ack.vim'
@@ -75,12 +77,18 @@ Plug 'majutsushi/tagbar'
 "}}}
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'vim-scripts/indentpython'
 Plug 'tmhedberg/SimpylFold'
 "{{{
 "}}}
 Plug 'janko-m/vim-test'
 "{{{
+    let g:test#python#runner = 'pytest'
+    "these "Ctrl mappings" work well when Caps Lock is mapped to Ctrl
+    nmap <silent> tn :TestNearest --pdb<CR>
+    nmap <silent> tf :TestFile<CR>
+    nmap <silent> ts :TestSuite<CR>
+    nmap <silent> tl :TestLast<CR>
+    nmap <silent> tg :TestVisit<CR>
 "}}}
 Plug 'sbdchd/neoformat'
 " {{{
@@ -120,13 +128,16 @@ Plug 'terryma/vim-smooth-scroll'
 "}}}
 call plug#end()
 
+"set background=dark
+"colorscheme NeoSolarized
+
 """"" COLORSCHEME
 hi Normal guibg=none ctermbg=none
 hi NonText guibg=none ctermbg=none
 
 "folds:
 hi Folded ctermfg=Grey
-hi Folded ctermbg=200
+hi Folded ctermbg=000
 
 "lines:
 hi StatusLine cterm=none gui=none ctermbg=none ctermfg=Black
