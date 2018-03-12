@@ -56,6 +56,8 @@ autocmd BufEnter * execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('
 
 "define plugins with options
 call plug#begin('~/.vim/plugged')
+Plug 'alfredodeza/coveragepy'
+Plug 'parsonsmatt/intero-neovim'
 Plug 'icymind/NeoSolarized'
 Plug 'junegunn/goyo.vim'
 Plug 'scrooloose/nerdtree.git'
@@ -89,6 +91,7 @@ Plug 'janko-m/vim-test'
     nmap <silent> ts :TestSuite<CR>
     nmap <silent> tl :TestLast<CR>
     nmap <silent> tg :TestVisit<CR>
+    nmap <silent> tc :TestSuite --cov-report term-missing --cov=ROVA<CR>
 "}}}
 Plug 'sbdchd/neoformat'
 " {{{
